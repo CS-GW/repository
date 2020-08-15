@@ -10,31 +10,33 @@ public class Item {
 
     ItemActions[] itemActionsArray;
 
-    public Item(String name, String description) {
+    public Item(String name, String description, String possibleAction) {
         this.itemName = name;
         this.itemDescription = description;
         this.itemActionsArray = new ItemActions[3];
     }
+
     public boolean arrayCheck(ItemActions action) {
         for (int i = 0; i < itemActionsArray.length; i++) {
             if (itemActionsArray[i] == action) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public void addItemAction(ItemActions action){
-        if(arrayCheck(action) == true){
-            for (int i = 0; i < 3; i++){
-                if( itemActionsArray[i] == null){
-                    itemActionsArray[i] = action;
-                    break;
-                    //add without break
-                }
+        boolean check = true;
+        int counter = 0;
+
+        while(check && counter < 3){
+            if (itemActionsArray[counter] == null){
+                itemActionsArray[counter] = action;
+                check = false;
+            } else {
+                counter++;
             }
         }
-
     }
 
     public boolean arrayCheck1(ItemActions action) {
@@ -42,7 +44,11 @@ public class Item {
 
             switch (action) {
                 case POSSESS:
-                    return false;
+                    for (ItemActions local: itemActionsArray){
+                        if (local == action){
+                            return true;
+                        }
+                    }
                 case THROW:
                     return false;
                 case SHAKE:

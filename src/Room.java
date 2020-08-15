@@ -27,11 +27,11 @@ public class Room {
     }
 
 
-    public void addAdult(Adult adultA) {
+    public void addCharacter(Character characterA) {
         for (int i = 0; i<characterArray.length; i++) {
             if (characterArray[i] == null){
-                characterArray[i] =adultA;
-                adultA.roomName = roomName;
+                characterArray[i] =characterA;
+                characterA.roomName = roomName;
                 break;
             }
         }

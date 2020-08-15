@@ -4,9 +4,9 @@ import java.util.List;
 
 
 public class Adult extends NPC {
-    String name;
-    String description;
-    String roomName;
+    //String name;
+    //String description;
+    //String roomName;
 
 
     public Adult(String name, String description){
