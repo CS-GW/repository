@@ -1,19 +1,36 @@
+
+
+import java.util.Arrays;
+import java.util.List;
+
 public class Item {
     String itemName;
     String itemDescription;
+
+
+
+
 
     public enum ItemActions {
         POSSESS,
         SHAKE,
         THROW
     }
-
     ItemActions[] itemActionsArray;
 
-    public Item(String name, String description, String possibleAction) {
+    @Override
+    public String toString() {
+        return "Item{" +
+                "itemName='" + itemName + '\'' +
+                ", itemDescription='" + itemDescription;
+    }
+
+    public Item (String name, String description) {
         this.itemName = name;
         this.itemDescription = description;
         this.itemActionsArray = new ItemActions[3];
+
+
     }
 
     public boolean arrayCheck(ItemActions action) {

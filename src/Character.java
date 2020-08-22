@@ -1,17 +1,30 @@
+
 public class Character {
+    String characterName;
+    String characterDescription;
     private String roomName;
-    String name;
-    String description;
 
+    Character(){
+    }
 
-    public String getRoomName(){
+    Character(String Name, String Description) {
+        this.characterName = Name;
+        this.characterDescription = Description;
+    }
+
+    public String getRoomName() {
         return this.roomName;
     }
-    public String getName(){
-        return this.name;
+
+    public String getCharacterName() {
+        return this.characterName;
     }
-    public String getDescription(){
-        return this.description;
+
+    public String getCharacterDescription() {
+        return this.characterDescription;
+    }
+    public String toString() {
+        return this.characterName + " " + this.characterDescription;
     }
 
 

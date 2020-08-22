@@ -1,8 +1,3 @@
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-
-
 public class Adult extends NPC {
     //String name;
     //String description;
@@ -10,13 +5,13 @@ public class Adult extends NPC {
 
 
     public Adult(String name, String description){
-        this.name = name;
-        this.description = description;
+        this.characterName = name;
+        this.characterDescription = description;
     }
 
 
     public String toString() {
-        return this.name + " " + this.description;
+        return this.characterName + " " + this.characterDescription;
 
 
         //ArrayList yo = new ArrayList();
