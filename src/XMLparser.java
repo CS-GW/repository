@@ -58,11 +58,17 @@ public class XMLparser extends DefaultHandler {
             String itemActions = atts.getValue("actions");
             String[] itemActionsParsed = itemActions.split(", ");
             Item newItemA = new Item(itemName, itemDescription);
-            //for(int i = 0; i < itemActionsParsed.length; i++){
-              //  if(itemActionsParsed(i).contains
-
-                //        .ItemActions.POSSESS
-            //}
+            for(int i = 0; i < itemActionsParsed.length; i++){
+              if(itemActionsParsed[i].contains("throw")) {
+                    newItemA.addItemAction(Item.ItemActions.THROW);
+                }
+                if(itemActionsParsed[i].contains("shake")){
+                    newItemA.addItemAction(Item.ItemActions.SHAKE);
+            }
+                if(itemActionsParsed[i].contains("possess")){
+                    newItemA.addItemAction(Item.ItemActions.POSSESS);
+                }
+            }
 
 
 
