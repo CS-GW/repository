@@ -4,16 +4,20 @@ public class Character {
     String characterDescription;
     private String roomName;
 
-    Character(){
-    }
+    public Character(){
 
-    Character(String Name, String Description) {
+    }
+    public Character(String Name, String Description) {
         this.characterName = Name;
         this.characterDescription = Description;
     }
 
     public String getRoomName() {
         return this.roomName;
+    }
+
+    protected void setRoomName(String roomName){
+        this.roomName = roomName;
     }
 
     public String getCharacterName() {

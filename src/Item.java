@@ -18,11 +18,10 @@ public class Item {
     }
     ItemActions[] itemActionsArray;
 
-    @Override
     public String toString() {
         return "Item{" +
                 "itemName='" + itemName + '\'' +
-                ", itemDescription='" + itemDescription;
+                ", itemDescription='" + itemDescription + "'";
     }
 
     public Item (String name, String description) {

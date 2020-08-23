@@ -15,16 +15,24 @@ public class XMLparserMain {
 
 
     static public void main(String[] args) throws Exception {
+
+        ArrayList<Room> roomList = new ArrayList<>();
         SAXParserFactory spf = SAXParserFactory.newInstance();
         try {
-            InputStream xmlInput = new FileInputStream("/Users/gilbert/Documents/CSC241/repository/src/importXMLproject.xml");
+            InputStream xmlInput = new FileInputStream("src/importXMLproject.xml");
             SAXParser saxParser = spf.newSAXParser();
             XMLparser sxp = new XMLparser();
             saxParser.parse(xmlInput, sxp);
+            roomList = sxp.getRoomList();
+            System.out.println(roomList);
+
+
         }
         catch (SAXException | ParserConfigurationException | IOException anException) {
             anException.printStackTrace();
         }
+        System.out.println("Space holder");
+        System.out.println("Space holder");
 
 
 

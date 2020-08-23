@@ -39,18 +39,18 @@ public class Room {
 
     public String toString() {
         String returnstring = "";
-        returnstring = returnstring + this.roomName + " " + this.description;
+        returnstring += this.roomName + " " + this.description;
 
         for (int i = 0; i < characterArray.length; i++) {
             if (characterArray[i] != null) {
-                Character aduulo = this.characterArray[i];
-                returnstring = returnstring + " " + (aduulo.toString());
+                //Character aduulo = this.characterArray[i];
+                returnstring += " " + characterArray[i];
             }
         }
         for (int i = 0; i < itemArray.length; i++) {
             if (itemArray[i] != null) {
-                Item aduulo = this.itemArray[i];
-                returnstring = returnstring + " " + (aduulo.toString());
+                //Item aduulo = this.itemArray[i];
+                returnstring += " " + itemArray[i];
             }
         }
 
@@ -60,24 +60,26 @@ public class Room {
 
     }
 
-    public void addCharacter(Character characterA) {
+    public boolean addCharacter(Character characterA) {
         for (int i = 0; i < characterArray.length; i++) {
             if (characterArray[i] == null) {
                 characterArray[i] = characterA;
-                characterA.characterName = getRoomName();
+                characterA.setRoomName(getRoomName());
                 //characterA.roomName = roomName;
-                break;
+                return true;
             }
         }
+        return false;
     }
 
-    public void addItem(Item itemA) {
+    public boolean addItem(Item itemA) {
         for (int i = 0; i < itemArray.length; i++) {
             if (itemArray[i] == null) {
                 itemArray[i] = itemA;
-                break;
+                return true;
             }
         }
+        return false;
     }
 
     public void moveCharacter(Character characterA) {

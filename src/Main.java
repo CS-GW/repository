@@ -9,6 +9,27 @@ public class Main {
         Item rock = new Item("rock", "heavy");
         Room redroom = new Room("snow","on da bluff");
 
+        Room checkRoom = new Room("Kitchen", "A place for cooking");
+        Character vincent = new Adult("Vincent", "Balding");
+        Character gilbert2 = new Adult("Gilbert", "Programmer");
+
+        /*
+        System.out.println(vincent);
+        System.out.println(gilbert2);
+
+        checkRoom.addCharacter(vincent);
+        checkRoom.addCharacter(gilbert2);
+
+        System.out.println(vincent);
+        System.out.println(gilbert2);
+
+        System.out.println(checkRoom);
+
+         */
+
+
+
+        /*
         Player billya = new Player();
         billya.characterName = "joe";
         billya.characterDescription = "numbnuts";
@@ -22,5 +43,7 @@ public class Main {
         System.out.println(bedroom);
         bedroom.roomEast = redroom;
         System.out.println(bedroom.roomEast);
+
+         */
     }
 }

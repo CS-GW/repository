@@ -7,7 +7,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.util.ArrayList;
 
 public class XMLparser extends DefaultHandler {
-    ArrayList<Room> roomList;
+    ArrayList<Room> roomList = new ArrayList<>();
     String roomName1;
     String description;
     String localname1;
@@ -26,7 +26,6 @@ public class XMLparser extends DefaultHandler {
     int roomCount = -1;
 
     public void startDocument() throws SAXException {
-        roomList = new ArrayList<>();
     }
 
     public void startElement(String namespaceURI,
@@ -46,9 +45,7 @@ public class XMLparser extends DefaultHandler {
 
         }
         if (qName.equals("player")) {
-            Player player2 = new Player();
-            player2.characterName = atts.getValue("name");
-            player2.characterDescription = atts.getValue("description");
+            Player player2 = new Player(atts.getValue("name"),atts.getValue("description"));
             roomList.get(roomCount).addCharacter(player2);
         }
 
@@ -92,7 +89,7 @@ public class XMLparser extends DefaultHandler {
                 room1.east = atts.getValue("east");
             }
             if (atts.getValue("west") != null) {
-                room1.south = atts.getValue("west");
+                room1.west = atts.getValue("west");
             }
 
             roomList.add(room1);
@@ -109,25 +106,26 @@ public class XMLparser extends DefaultHandler {
                            String qName) throws SAXException {
 
         if (qName.equals("room")) {
-            System.out.println("End Element " + roomCount);
+            System.out.println("End Element " + roomList.get(0));
         }
 
     }
 
-    public void roomDirectionMap() {
+    public void endDocument() throws SAXException{
+
         for (int i = 0; i < roomCount; i++) {
             for (int a = 0; a < roomCount; a++) {
-                if (roomList.get(a).roomName.contains(roomList.get(i).north)) {
+                if (roomList.get(a).roomName.equals(roomList.get(i).north)) {
                     roomList.get(i).roomNorth = roomList.get(a);
                 }
-                if (roomList.get(a).roomName.contains(roomList.get(i).south)) {
+                if (roomList.get(a).roomName.equals(roomList.get(i).south)) {
                     roomList.get(i).roomSouth = roomList.get(a);
 
                 }
-                if (roomList.get(a).roomName.contains(roomList.get(i).west)) {
+                if (roomList.get(a).roomName.equals(roomList.get(i).west)) {
                     roomList.get(i).roomWest = roomList.get(a);
                 }
-                if (roomList.get(a).roomName.contains(roomList.get(i).east)) {
+                if (roomList.get(a).roomName.equals(roomList.get(i).east)) {
                     roomList.get(i).roomEast = roomList.get(a);
                 }
             }
@@ -135,6 +133,17 @@ public class XMLparser extends DefaultHandler {
         for (int i = 0; i < roomCount; i++) {
             System.out.println(roomList.get(i).getroomEast());
         }
+
+
+
+
+
+
     }
+
+    public ArrayList<Room> getRoomList(){
+        return roomList;
+    }
+
 
 }
