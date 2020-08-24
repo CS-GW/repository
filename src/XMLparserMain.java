@@ -10,27 +10,23 @@ import java.io.IOException;
 
 import java.util.*;
 public class XMLparserMain {
-    ArrayList<Room> roomList = new ArrayList<>();
-
-    Room playerStartingRoom;
-
-
-    public Room getPlayerStartingRoom(){
-        return playerStartingRoom;
-    }
 
 
 
 
-    public ArrayList<Room> getRoomList() {
-        return roomList;
-    }
+
+
+
+
+
+
 
     static public void main(String[] args) throws Exception {
         ArrayList<Room> roomList = new ArrayList<>();
-        Player playerPlayer = null;
 
-        Room playerStartingRoom = null;
+        Player gamePlayer = null;
+
+
 
 
         SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -39,19 +35,16 @@ public class XMLparserMain {
             SAXParser saxParser = spf.newSAXParser();
             XMLparser sxp = new XMLparser();
             saxParser.parse(xmlInput, sxp);
-            roomList = sxp.getRoomList();
-            playerPlayer = sxp.getPlayer();
-            playerStartingRoom = sxp.getPlayerLocation();
+            gamePlayer = sxp.getPlayer();
+
 
 
         }
         catch (SAXException | ParserConfigurationException | IOException anException) {
             anException.printStackTrace();
         }
-
-        System.out.println(playerPlayer.characterName + " starts in " + playerPlayer.getLocationRoom().getRoomName() );
-
-        playerPlayer.play();
+        System.out.println(gamePlayer.characterName + " is playing, starting in the " + gamePlayer.getLocationRoom().getRoomName());
+        gamePlayer.play();
 
 
 

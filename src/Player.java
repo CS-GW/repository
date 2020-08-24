@@ -147,38 +147,39 @@ public class Player extends Character {
                         "exit, quit – these commands print a “Goodbye” message and quit the program.");
             } else if(getGameCommand().contains(": ")) {
                 int left = getGameCommand().indexOf(":");
-                String sub = getGameCommand().substring(0, left);
+                String possibleAction = getGameCommand().substring(0, left);
                 String possibleItem = getGameCommand().substring(left+2);
-                    if (sub.matches("shake") ||
-                            sub.matches("possess") ||
-                            sub.matches("throw")) {
+                    if (possibleAction.matches("shake") ||
+                            possibleAction.matches("possess") ||
+                            possibleAction.matches("throw")) {
                         // matches vs equals strings
                         if (!possibleItem.isEmpty()) {
 
 
-                        String potentialItemCall = getGameCommand();
+                        //String potentialItemCall = getGameCommand();
                         boolean realItem = true;
                         while (realItem) {
-                            int left1 = potentialItemCall.indexOf(":");
-                            String sub1 = potentialItemCall.substring(left1 + 2);
+                            //int left1 = potentialItemCall.indexOf(":");
+                            //String sub1 = potentialItemCall.substring(left1 + 2);
                             for (int i = 0; i < getLocationRoom().itemArray.length; i++) {
                                 if (getLocationRoom().itemArray[i] != null) {
                                     //System.out.println(getLocationRoom().itemArray[i].itemName+ "= " +sub1);
-                                    if (getLocationRoom().itemArray[i].itemName.equals(sub1)) {
-                                        if (potentialItemCall.contains("possess: ")) {
+                                    if (getLocationRoom().itemArray[i].itemName.equals(possibleItem)) {
+                                        if (possibleAction.equals("possess")) {
                                             if (getLocationRoom().itemArray[i].arrayCheck(Item.ItemActions.POSSESS)) {
+                                                System.out.println(getLocationRoom().itemArray[i].itemName + " got possessed");
                                                 realItem = false;
                                                 break;
                                             }
                                         }
-                                        else if (potentialItemCall.contains("throw: ")) {
+                                        else if (possibleAction.equals("throw")) {
                                             if (getLocationRoom().itemArray[i].arrayCheck(Item.ItemActions.THROW)) {
                                                 System.out.println(getLocationRoom().itemArray[i].itemName + " got thrown");
                                                 realItem = false;
                                                 break;
                                             }
                                         }
-                                        else if (potentialItemCall.contains("shake: ")) {
+                                        else if (possibleAction.equals("shake")) {
                                             if (getLocationRoom().itemArray[i].arrayCheck(Item.ItemActions.SHAKE)) {
                                                 System.out.println(getLocationRoom().itemArray[i].itemName + " got shook");
                                                 realItem = false;
@@ -187,9 +188,12 @@ public class Player extends Character {
 
                                         }
 
-                                            System.out.println("Action not possible with " + sub1);
+
+                                            System.out.println(possibleAction + " not possible with " + possibleItem);
                                             realItem = false;
                                             break;
+
+
                                         /*else? {
                                             System.out.println("Item/Action not possible with "+ sub1 + " error loop 3");
                                             realItem = false;
@@ -199,7 +203,7 @@ public class Player extends Character {
 
                                 }
                                     else {
-                                    System.out.println(sub1 + " is not an availble item");
+                                    System.out.println(possibleItem + " is not an availble item");
                                     realItem = false;
                                     break;
                                 }
