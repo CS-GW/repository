@@ -20,7 +20,7 @@ public class Room {
         this.description = description;
         this.roomArray = new Room[4];
         this.characterArray = new Character[5];
-        this.itemArray = new Item[10];
+        this.itemArray = new Item[5];
 
 
 

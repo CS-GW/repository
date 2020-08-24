@@ -66,7 +66,11 @@ public class XMLparser extends DefaultHandler {
             String itemName = atts.getValue("name");
             String itemDescription = atts.getValue("description");
             String itemActions = atts.getValue("actions");
-            String[] itemActionsParsed = itemActions.split(", ");
+            String[] itemActionsParsed = itemActions.split(",");
+            System.out.println(itemName);
+            for(int i = 0;i<itemActionsParsed.length;i++){
+                System.out.println(itemActionsParsed[i]);
+            }
             Item newItemA = new Item(itemName, itemDescription);
             for(int i = 0; i < itemActionsParsed.length; i++){
               if(itemActionsParsed[i].equals("throw")) {
@@ -79,10 +83,6 @@ public class XMLparser extends DefaultHandler {
                     newItemA.addItemAction(Item.ItemActions.POSSESS);
                 }
             }
-
-
-
-
 
             roomList.get(roomCount).addItem(newItemA);
 

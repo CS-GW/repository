@@ -26,17 +26,14 @@ public class Player extends Character {
         while (activeGame) {
             runScanner();
             if //(getGameCommand().matches("quit"|"exit"))
-            (getGameCommand().equals("quit")||getGameCommand().equals("exit"))
-            {
+            (getGameCommand().equals("quit") || getGameCommand().equals("exit")) {
                 activeGame = false;
-            }
-            else if (getGameCommand().equals("look")) {
+            } else if (getGameCommand().equals("look")) {
 //look – this command immediately outputs to the user the complete information pertaining
 // to the Room the Player is in (together with all Characters/Items in it).
                 System.out.println(getLocationRoom());
 
-            }
-            else if (getGameCommand().equals("east")) {
+            } else if (getGameCommand().equals("east")) {
                 //"north, east, south, west – the Player leaves the current Room and enters its respective neighbor.
                 // Be careful about special cases (no such neighbor, etc).
                 // If the Player cannot execute the command for some reason,
@@ -58,15 +55,12 @@ public class Player extends Character {
                                 break;
                             }
                         }
-
-
                     }
                 } else {
                     System.out.println("Direction not available");
 
                 }
-            }
-            else if (getGameCommand().equals("west")) {
+            } else if (getGameCommand().equals("west")) {
                 if (getLocationRoom().roomWest != null) {
 
                     Room newRoom = getLocationRoom().roomWest;
@@ -85,12 +79,10 @@ public class Player extends Character {
                             }
                         }
                     }
-                }
-                else {
+                } else {
                     System.out.println("Direction not available");
                 }
-            }
-            else if (getGameCommand().equals("north")) {
+            } else if (getGameCommand().equals("north")) {
                 //"north, east, south, west – the Player leaves the current Room and enters its respective neighbor.
                 // Be careful about special cases (no such neighbor, etc).
                 // If the Player cannot execute the command for some reason,
@@ -119,8 +111,7 @@ public class Player extends Character {
                     System.out.println("Direction not available");
 
                 }
-            }
-            else if (getGameCommand().equals("south")) {
+            } else if (getGameCommand().equals("south")) {
                 if (null != getLocationRoom().roomSouth) {
 
                     Room newRoom = getLocationRoom().roomSouth;
@@ -138,43 +129,83 @@ public class Player extends Character {
                                 break;
                             }
                         }
+                    }
+                } else {
+                    System.out.println("Direction not available");
+                }
+            } else if (getGameCommand().equals("help")) {
+                System.out.println("Command List:");
+                System.out.println("help – this command outputs a help message to the user, consisting of the full list of commands that can be used, together with descriptions of what they do (run the example project for a possible help message).\n" +
+                        "look – this command immediately outputs to the user the complete information pertaining to the Room the Player is in (together with all Characters/Items in it).\n" +
+                        "north, east, south, west – the Player leaves the current Room and enters its respective neighbor. Be careful about special cases (no such neighbor, etc). If the Player cannot execute the command for some reason, provide according output to the user.\n" +
+                        "shake:[itemname], possess:[itemname], throw:[itemname] – these commands allow manipulating the objects in the room, causing a reaction from the other Characters. Allow the user to type the actual item name, e.g., shake:white lamp.\n" +
+                        "exit, quit – these commands print a “Goodbye” message and quit the program.");
+            } else if (getGameCommand().contains("shake: ") ||
+                    getGameCommand().contains("possess: ") ||
+                    getGameCommand().contains("throw: ")) {
+
+                String potentialItemCall = getGameCommand();
+                boolean realItem = true;
+                while (realItem) {
+                    int left = potentialItemCall.indexOf(":");
+                    String sub = potentialItemCall.substring(left + 2);
+                    for (int i = 0; i < getLocationRoom().itemArray.length; i++) {
+                        if (getLocationRoom().itemArray[i] != null) {
+                            if (getLocationRoom().itemArray[i].itemName.matches(sub)) {
+                                if (potentialItemCall.contains("possess: ")) {
+                                    if (getLocationRoom().itemArray[i].arrayCheck(Item.ItemActions.POSSESS)) {
+                                        System.out.println(getLocationRoom().itemArray[i].itemName + " got possessed");
+                                        realItem = false;
+                                        break;
+                                    }
+                                }
+                                else if (potentialItemCall.contains("throw: ")) {
+                                    if (getLocationRoom().itemArray[i].arrayCheck(Item.ItemActions.THROW)) {
+                                        System.out.println(getLocationRoom().itemArray[i].itemName + " got thrown");
+                                        realItem = false;
+                                        break;
+                                    }
+                                }
+                                else if (potentialItemCall.contains("shake: ")) {
+                                    if (getLocationRoom().itemArray[i].arrayCheck(Item.ItemActions.SHAKE)) {
+                                        System.out.println(getLocationRoom().itemArray[i].itemName + " got shook");
+                                        realItem = false;
+                                        break;
+                                    }
+                                }
+                                else {
+                                    System.out.println("Item/Action not possible");
+                                    realItem = false;
+                                    break;
+                                }
+                            }
 
 
+                        }else {
+                            System.out.println("Item/Action not possible");
+                            realItem = false;
+                            break;
+                        }
                     }
                 }
-                else {
-                    System.out.println("Direction not available");
-
-                }
             }
-                else if (getGameCommand().equals("help")) {
-                    System.out.println("Command List:");
-                    System.out.println("help – this command outputs a help message to the user, consisting of the full list of commands that can be used, together with descriptions of what they do (run the example project for a possible help message).\n" +
-                            "look – this command immediately outputs to the user the complete information pertaining to the Room the Player is in (together with all Characters/Items in it).\n" +
-                            "north, east, south, west – the Player leaves the current Room and enters its respective neighbor. Be careful about special cases (no such neighbor, etc). If the Player cannot execute the command for some reason, provide according output to the user.\n" +
-                            "shake:[itemname], possess:[itemname], throw:[itemname] – these commands allow manipulating the objects in the room, causing a reaction from the other Characters. Allow the user to type the actual item name, e.g., shake:white lamp.\n" +
-                            "exit, quit – these commands print a “Goodbye” message and quit the program.");
-                }
-                else if(getGameCommand().contains("shake")||
-                    getGameCommand().contains("possess")
-            
 
 
+            //"shake:[itemname], possess:[itemname], throw:[itemname] –
+            // these commands allow manipulating the objects in the room, causing a reaction from the other Characters.
+            // Allow the user to type the actual item name, e.g., shake:white lamp.\n" +
 
 
-            ){
-                    System.out.println("do nutin");
-
-                    //"shake:[itemname], possess:[itemname], throw:[itemname] –
-                // these commands allow manipulating the objects in the room, causing a reaction from the other Characters.
-                // Allow the user to type the actual item name, e.g., shake:white lamp.\n" +
+            else {
+                System.out.println("Could not understand, please repeat");
             }
-                else {
-                    System.out.println("Could not understand, please repeat");
-                }
-            }
-            System.out.println("Goodbye");
         }
+        System.out.println("Goodbye");
     }
+}
+
+
+
+
 
 
