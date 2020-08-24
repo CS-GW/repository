@@ -1,9 +1,17 @@
+
+
+import java.util.Scanner;
+
 public class Main {
+
+
+
 
     public static void main(String[] args) {
 
 
         Adult gilbert = new Adult("me","lazy");
+
         Adult g2 = new Adult("not me","programmer");
         Room bedroom = new Room("bed", "warm");
         Item rock = new Item("rock", "heavy");
@@ -12,6 +20,36 @@ public class Main {
         Room checkRoom = new Room("Kitchen", "A place for cooking");
         Character vincent = new Adult("Vincent", "Balding");
         Character gilbert2 = new Adult("Gilbert", "Programmer");
+        checkRoom.addCharacter(gilbert);
+
+        checkRoom.addCharacter(gilbert);
+        checkRoom.addCharacter(vincent);
+        checkRoom.removeCharacter(vincent);
+        System.out.println(checkRoom);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         /*
         System.out.println(vincent);

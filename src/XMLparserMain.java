@@ -1,6 +1,4 @@
-import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -12,11 +10,29 @@ import java.io.IOException;
 
 import java.util.*;
 public class XMLparserMain {
+    ArrayList<Room> roomList = new ArrayList<>();
 
+    Room playerStartingRoom;
+
+
+    public Room getPlayerStartingRoom(){
+        return playerStartingRoom;
+    }
+
+
+
+
+    public ArrayList<Room> getRoomList() {
+        return roomList;
+    }
 
     static public void main(String[] args) throws Exception {
-
         ArrayList<Room> roomList = new ArrayList<>();
+        Player playerPlayer = null;
+
+        Room playerStartingRoom = null;
+
+
         SAXParserFactory spf = SAXParserFactory.newInstance();
         try {
             InputStream xmlInput = new FileInputStream("src/importXMLproject.xml");
@@ -24,21 +40,20 @@ public class XMLparserMain {
             XMLparser sxp = new XMLparser();
             saxParser.parse(xmlInput, sxp);
             roomList = sxp.getRoomList();
-            System.out.println(roomList);
+            playerPlayer = sxp.getPlayer();
+            playerStartingRoom = sxp.getPlayerLocation();
 
 
         }
         catch (SAXException | ParserConfigurationException | IOException anException) {
             anException.printStackTrace();
         }
-        System.out.println("Space holder");
-        System.out.println("Space holder");
+
+        System.out.println(playerPlayer.characterName + " starts in " + playerPlayer.getLocationRoom().getRoomName() );
+
+        playerPlayer.play();
 
 
-
-    }
-
-
-
+        }
 
 }

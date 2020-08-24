@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 public class XMLparser extends DefaultHandler {
     ArrayList<Room> roomList = new ArrayList<>();
+    Room playerLocation;
+    String playaname;
+    Player thaPlayaPlayer;
     String roomName1;
     String description;
     String localname1;
@@ -33,7 +36,7 @@ public class XMLparser extends DefaultHandler {
                              String qName,
                              Attributes atts) throws SAXException {
 
-            System.out.println("Start Element " + qName);
+           // System.out.println("Start Element " + qName);
         if (qName.equals("child")) {
             Child newChildA = new Child(atts.getValue("name"), atts.getValue("description"));
             roomList.get(roomCount).addCharacter(newChildA);
@@ -47,6 +50,16 @@ public class XMLparser extends DefaultHandler {
         if (qName.equals("player")) {
             Player player2 = new Player(atts.getValue("name"),atts.getValue("description"));
             roomList.get(roomCount).addCharacter(player2);
+            player2.setLocationRoom(roomList.get(roomCount));
+            thaPlayaPlayer = player2;
+
+            playerLocation = roomList.get(roomCount);
+            //System.out.println(playerLocation.roomName);
+            //System.out.println(player2.characterName);
+
+
+
+
         }
 
         if (qName.equals("item")) {
@@ -56,7 +69,7 @@ public class XMLparser extends DefaultHandler {
             String[] itemActionsParsed = itemActions.split(", ");
             Item newItemA = new Item(itemName, itemDescription);
             for(int i = 0; i < itemActionsParsed.length; i++){
-              if(itemActionsParsed[i].contains("throw")) {
+              if(itemActionsParsed[i].equals("throw")) {
                     newItemA.addItemAction(Item.ItemActions.THROW);
                 }
                 if(itemActionsParsed[i].contains("shake")){
@@ -106,7 +119,7 @@ public class XMLparser extends DefaultHandler {
                            String qName) throws SAXException {
 
         if (qName.equals("room")) {
-            System.out.println("End Element " + roomList.get(0));
+           // System.out.println("End Element " + roomList.get(0));
         }
 
     }
@@ -131,7 +144,7 @@ public class XMLparser extends DefaultHandler {
             }
         }
         for (int i = 0; i < roomCount; i++) {
-            System.out.println(roomList.get(i).getroomEast());
+            //System.out.println(roomList.get(i).getroomEast());
         }
 
 
@@ -143,6 +156,12 @@ public class XMLparser extends DefaultHandler {
 
     public ArrayList<Room> getRoomList(){
         return roomList;
+    }
+    public Room getPlayerLocation(){
+        return playerLocation;
+    }
+    public Player getPlayer(){
+        return thaPlayaPlayer;
     }
 
 

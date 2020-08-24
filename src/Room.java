@@ -12,6 +12,7 @@ public class Room {
     String south;
     String west;
     String east;
+    Room yo;
 
 
     public Room(String roomName, String description) {
@@ -20,6 +21,8 @@ public class Room {
         this.roomArray = new Room[4];
         this.characterArray = new Character[5];
         this.itemArray = new Item[10];
+
+
 
 
 
@@ -71,7 +74,16 @@ public class Room {
         }
         return false;
     }
+    public void removeCharacter(Character characterA) {
+        for (int i = 0; i < characterArray.length; i++) {
+            if (characterArray[i] != null){
+                    if(characterArray[i].equals(characterA)){
+                        characterArray[i] = null;
+                    }
 
+            }
+        }
+    }
     public boolean addItem(Item itemA) {
         for (int i = 0; i < itemArray.length; i++) {
             if (itemArray[i] == null) {
@@ -82,9 +94,7 @@ public class Room {
         return false;
     }
 
-    public void moveCharacter(Character characterA) {
-        //...
-    }
+
 
 
 }

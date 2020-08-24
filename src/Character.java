@@ -3,6 +3,8 @@ public class Character {
     String characterName;
     String characterDescription;
     private String roomName;
+    Room locationRoom;
+
 
     public Character(){
 
@@ -10,6 +12,15 @@ public class Character {
     public Character(String Name, String Description) {
         this.characterName = Name;
         this.characterDescription = Description;
+    }
+
+    public boolean setLocationRoom(Room locationRoom) {
+        this.locationRoom = locationRoom;
+        return true;
+    }
+
+    public Room getLocationRoom() {
+        return locationRoom;
     }
 
     public String getRoomName() {
