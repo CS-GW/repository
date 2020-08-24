@@ -47,13 +47,15 @@ public class Room {
         for (int i = 0; i < characterArray.length; i++) {
             if (characterArray[i] != null) {
                 //Character aduulo = this.characterArray[i];
-                returnstring += " " + characterArray[i];
+                returnstring += " \n"
+                + characterArray[i];
             }
         }
         for (int i = 0; i < itemArray.length; i++) {
             if (itemArray[i] != null) {
                 //Item aduulo = this.itemArray[i];
-                returnstring += " " + itemArray[i];
+                returnstring += " \n"
+                        + itemArray[i];
             }
         }
 

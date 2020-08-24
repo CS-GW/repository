@@ -67,9 +67,9 @@ public class XMLparser extends DefaultHandler {
             String itemDescription = atts.getValue("description");
             String itemActions = atts.getValue("actions");
             String[] itemActionsParsed = itemActions.split(",");
-            System.out.println(itemName);
+            //System.out.println(itemName);
             for(int i = 0;i<itemActionsParsed.length;i++){
-                System.out.println(itemActionsParsed[i]);
+                //System.out.println(itemActionsParsed[i]);
             }
             Item newItemA = new Item(itemName, itemDescription);
             for(int i = 0; i < itemActionsParsed.length; i++){

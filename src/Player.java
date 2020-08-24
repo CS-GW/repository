@@ -18,10 +18,14 @@ public class Player extends Character {
     protected String getGameCommand() {
         return this.gameCommand;
     }
+    public String commandError(){
+        return "Could not understand, please repeat";
+    }
 
 
     public void play() {
         Boolean activeGame = true;
+
 
         while (activeGame) {
             runScanner();
@@ -132,6 +136,7 @@ public class Player extends Character {
                     }
                 } else {
                     System.out.println("Direction not available");
+                    System.out.println(commandError());
                 }
             } else if (getGameCommand().equals("help")) {
                 System.out.println("Command List:");
@@ -140,72 +145,82 @@ public class Player extends Character {
                         "north, east, south, west – the Player leaves the current Room and enters its respective neighbor. Be careful about special cases (no such neighbor, etc). If the Player cannot execute the command for some reason, provide according output to the user.\n" +
                         "shake:[itemname], possess:[itemname], throw:[itemname] – these commands allow manipulating the objects in the room, causing a reaction from the other Characters. Allow the user to type the actual item name, e.g., shake:white lamp.\n" +
                         "exit, quit – these commands print a “Goodbye” message and quit the program.");
-            } else if (getGameCommand().contains("shake: ") ||
-                    getGameCommand().contains("possess: ") ||
-                    getGameCommand().contains("throw: ")) {
+            } else if(getGameCommand().contains(": ")) {
+                int left = getGameCommand().indexOf(":");
+                String sub = getGameCommand().substring(0, left);
+                String possibleItem = getGameCommand().substring(left+2);
+                    if (sub.matches("shake") ||
+                            sub.matches("possess") ||
+                            sub.matches("throw")) {
+                        // matches vs equals strings
+                        if (!possibleItem.isEmpty()) {
 
-                String potentialItemCall = getGameCommand();
-                boolean realItem = true;
-                while (realItem) {
-                    int left = potentialItemCall.indexOf(":");
-                    String sub = potentialItemCall.substring(left + 2);
-                    for (int i = 0; i < getLocationRoom().itemArray.length; i++) {
-                        if (getLocationRoom().itemArray[i] != null) {
-                            if (getLocationRoom().itemArray[i].itemName.matches(sub)) {
-                                if (potentialItemCall.contains("possess: ")) {
-                                    if (getLocationRoom().itemArray[i].arrayCheck(Item.ItemActions.POSSESS)) {
-                                        System.out.println(getLocationRoom().itemArray[i].itemName + " got possessed");
-                                        realItem = false;
-                                        break;
+
+                        String potentialItemCall = getGameCommand();
+                        boolean realItem = true;
+                        while (realItem) {
+                            int left1 = potentialItemCall.indexOf(":");
+                            String sub1 = potentialItemCall.substring(left1 + 2);
+                            for (int i = 0; i < getLocationRoom().itemArray.length; i++) {
+                                if (getLocationRoom().itemArray[i] != null) {
+                                    //System.out.println(getLocationRoom().itemArray[i].itemName+ "= " +sub1);
+                                    if (getLocationRoom().itemArray[i].itemName.equals(sub1)) {
+                                        if (potentialItemCall.contains("possess: ")) {
+                                            if (getLocationRoom().itemArray[i].arrayCheck(Item.ItemActions.POSSESS)) {
+                                                realItem = false;
+                                                break;
+                                            }
+                                        }
+                                        else if (potentialItemCall.contains("throw: ")) {
+                                            if (getLocationRoom().itemArray[i].arrayCheck(Item.ItemActions.THROW)) {
+                                                System.out.println(getLocationRoom().itemArray[i].itemName + " got thrown");
+                                                realItem = false;
+                                                break;
+                                            }
+                                        }
+                                        else if (potentialItemCall.contains("shake: ")) {
+                                            if (getLocationRoom().itemArray[i].arrayCheck(Item.ItemActions.SHAKE)) {
+                                                System.out.println(getLocationRoom().itemArray[i].itemName + " got shook");
+                                                realItem = false;
+                                                break;
+                                            }
+
+                                        }
+
+                                            System.out.println("Action not possible with " + sub1);
+                                            realItem = false;
+                                            break;
+                                        /*else? {
+                                            System.out.println("Item/Action not possible with "+ sub1 + " error loop 3");
+                                            realItem = false;
+                                            break;
+                                        }*/
                                     }
+
                                 }
-                                else if (potentialItemCall.contains("throw: ")) {
-                                    if (getLocationRoom().itemArray[i].arrayCheck(Item.ItemActions.THROW)) {
-                                        System.out.println(getLocationRoom().itemArray[i].itemName + " got thrown");
-                                        realItem = false;
-                                        break;
-                                    }
-                                }
-                                else if (potentialItemCall.contains("shake: ")) {
-                                    if (getLocationRoom().itemArray[i].arrayCheck(Item.ItemActions.SHAKE)) {
-                                        System.out.println(getLocationRoom().itemArray[i].itemName + " got shook");
-                                        realItem = false;
-                                        break;
-                                    }
-                                }
-                                else {
-                                    System.out.println("Item/Action not possible");
+                                    else {
+                                    System.out.println(sub1 + " is not an availble item");
                                     realItem = false;
                                     break;
                                 }
+
                             }
-
-
-                        }else {
-                            System.out.println("Item/Action not possible");
-                            realItem = false;
-                            break;
                         }
-                    }
+                    } else {
+                            System.out.println("No item. "+commandError());
                 }
+
+                }
+
+                    else {
+                        System.out.println(commandError());
+                    }
             }
-
-
-            //"shake:[itemname], possess:[itemname], throw:[itemname] –
-            // these commands allow manipulating the objects in the room, causing a reaction from the other Characters.
-            // Allow the user to type the actual item name, e.g., shake:white lamp.\n" +
-
-
             else {
-                System.out.println("Could not understand, please repeat");
+                System.out.println(commandError());
             }
         }
         System.out.println("Goodbye");
     }
 }
-
-
-
-
-
 

@@ -2,13 +2,12 @@ public class Echo {
 
 
     public static void main(String[] args) {
-        String potentialItemCall = "rabba dabba do [son ]";
+        String potentialItemCall = "rabba: dabba ::do [son ]";
 
 
-        int left = potentialItemCall.indexOf("[");
-        int right = potentialItemCall.indexOf("]");
-        System.out.println(left+right);
-        String sub = potentialItemCall.substring(left+1, right);
+        int left = potentialItemCall.indexOf(":");
+
+        String sub = potentialItemCall.substring(0,left);
         System.out.println(sub);
 
 
