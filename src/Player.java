@@ -8,10 +8,10 @@ public class Player extends Character {
         this.characterDescription = description;
     }
 
-    public void runScanner() {
-        Scanner newScan = new Scanner(System.in);
+    public void runScanner(Scanner s) {
+        //Scanner newScan = new Scanner(System.in);
         System.out.println("Input a command:");
-        String gameCommand = newScan.nextLine();
+        String gameCommand = s.nextLine();
         this.gameCommand = gameCommand;
     }
 
@@ -23,12 +23,12 @@ public class Player extends Character {
     }
 
 
-    public void play() {
+    public void play(Scanner s) {
         Boolean activeGame = true;
 
 
         while (activeGame) {
-            runScanner();
+            runScanner(s);
             if //(getGameCommand().matches("quit"|"exit"))
             (getGameCommand().equals("quit") || getGameCommand().equals("exit")) {
                 activeGame = false;
@@ -44,25 +44,22 @@ public class Player extends Character {
                 // provide according output to the user.\n" +
                 //
                 if (getLocationRoom().roomEast != null) {
-                    Room newRoom = getLocationRoom().roomEast;
+                    //Room newRoom = getLocationRoom().roomEast;
 
-                    Character tempPlayerObject;
-                    for (int i = 0; i < 5; i++) {
-                        if (getLocationRoom().characterArray[i].getCharacterName().equals(getCharacterName())) {
+                    //Character tempPlayerObject;
 
-                            tempPlayerObject = getLocationRoom().characterArray[i];
+
+                            //tempPlayerObject = getLocationRoom().characterArray[i];
                             //System.out.println(tempPlayerObject);
-                            if (newRoom.addCharacter(tempPlayerObject)) {
-                                getLocationRoom().removeCharacter(tempPlayerObject);
-                                setLocationRoom(newRoom);
-                                System.out.println("You have now entered " + getLocationRoom().getRoomName());
-                                break;
-                            }
-                        }
+                    if (getLocationRoom().roomEast.addCharacter(this)) {
+                        getLocationRoom().removeCharacter(this);
+                        setLocationRoom(getLocationRoom().roomEast);
+                        System.out.println("You have now entered " + getLocationRoom().getRoomName());
+                    } else {
+                        System.out.println("Room is full!");
                     }
                 } else {
                     System.out.println("Direction not available");
-
                 }
             } else if (getGameCommand().equals("west")) {
                 if (getLocationRoom().roomWest != null) {
@@ -188,17 +185,10 @@ public class Player extends Character {
 
                                         }
 
+                                        System.out.println(possibleAction + " not possible with " + possibleItem);
+                                        realItem = false;
+                                        break;
 
-                                            System.out.println(possibleAction + " not possible with " + possibleItem);
-                                            realItem = false;
-                                            break;
-
-
-                                        /*else? {
-                                            System.out.println("Item/Action not possible with "+ sub1 + " error loop 3");
-                                            realItem = false;
-                                            break;
-                                        }*/
                                     }
 
                                 }

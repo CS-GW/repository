@@ -26,6 +26,9 @@ public class XMLparserMain {
 
         Player gamePlayer = null;
 
+        Scanner s = new Scanner(System.in);
+
+
 
 
 
@@ -44,7 +47,7 @@ public class XMLparserMain {
             anException.printStackTrace();
         }
         System.out.println(gamePlayer.characterName + " is playing, starting in the " + gamePlayer.getLocationRoom().getRoomName());
-        gamePlayer.play();
+        gamePlayer.play(s);
 
 
 
