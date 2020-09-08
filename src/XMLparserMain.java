@@ -11,26 +11,14 @@ import java.io.IOException;
 import java.util.*;
 public class XMLparserMain {
 
-
-
-
-
-
-
-
-
-
-
     static public void main(String[] args) throws Exception {
         ArrayList<Room> roomList = new ArrayList<>();
 
         Player gamePlayer = null;
+        ArrayList gameNPCsArray;
+        int gameNPCsInt;
 
         Scanner s = new Scanner(System.in);
-
-
-
-
 
         SAXParserFactory spf = SAXParserFactory.newInstance();
         try {
@@ -39,6 +27,8 @@ public class XMLparserMain {
             XMLparser sxp = new XMLparser();
             saxParser.parse(xmlInput, sxp);
             gamePlayer = sxp.getPlayer();
+            gameNPCsArray = sxp.charactergameArray;
+            gameNPCsInt = sxp.getGameNPCs();
 
 
 
@@ -48,16 +38,6 @@ public class XMLparserMain {
         }
         System.out.println(gamePlayer.characterName + " is playing, starting in the " + gamePlayer.getLocationRoom().getRoomName());
         gamePlayer.play(s);
-
-
-
-
-
-
-
-
-
-
     }
 
 }

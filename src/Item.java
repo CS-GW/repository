@@ -6,6 +6,8 @@ import java.util.List;
 public class Item {
     String itemName;
     String itemDescription;
+    Boolean clean;
+
 
 
 
@@ -26,12 +28,10 @@ public class Item {
 
     public Item (String name, String description) {
         this.itemName = name;
+        this.clean = true;
         this.itemDescription = description;
         this.itemActionsArray = new ItemActions[3];
-
-
     }
-
     public boolean arrayCheck(ItemActions action) {
         for (int i = 0; i < itemActionsArray.length; i++) {
             if (itemActionsArray[i] == action) {
@@ -54,7 +54,6 @@ public class Item {
             }
         }
     }
-
     public boolean arrayCheck1(ItemActions action) {
         for (int i = 0; i < itemActionsArray.length; i++) {
 
@@ -72,11 +71,9 @@ public class Item {
                 default:
                     return true;
             }
-
         }
         return true;
     }
-
 }
 
 

@@ -13,6 +13,9 @@ public class XMLparser extends DefaultHandler {
     Player thaPlayaPlayer;
     String roomName1;
     String description;
+    ArrayList charactergameArray;
+    int gameNPCs;
+
     String localname1;
     String localname2;
     String localname3;
@@ -26,6 +29,8 @@ public class XMLparser extends DefaultHandler {
     String roomWest;
     String characterName;
     String characterDescription;
+
+
     int roomCount = -1;
 
     public void startDocument() throws SAXException {
@@ -41,15 +46,19 @@ public class XMLparser extends DefaultHandler {
             Child newChildA = new Child(atts.getValue("name"), atts.getValue("description"));
             roomList.get(roomCount).addCharacter(newChildA);
 
+            gameNPCs++;
+
         }
         if (qName.equals("adult")) {
             Adult newAdultA = new Adult(atts.getValue("name"), atts.getValue("description"));
             roomList.get(roomCount).addCharacter(newAdultA);
 
+            gameNPCs++;
+
         }
         if (qName.equals("player")) {
             Player player2 = new Player(atts.getValue("name"),atts.getValue("description"));
-            roomList.get(roomCount).addCharacter(player2);
+            roomList.get(roomCount).setPlayer(player2);
             player2.setLocationRoom(roomList.get(roomCount));
             thaPlayaPlayer = player2;
 
@@ -153,10 +162,14 @@ public class XMLparser extends DefaultHandler {
 
 
     }
+    public ArrayList getCharactergameArray() {return charactergameArray;}
 
     public ArrayList<Room> getRoomList(){
         return roomList;
     }
+    public int getGameNPCs(){
+        return gameNPCs;}
+
     public Room getPlayerLocation(){
         return playerLocation;
     }

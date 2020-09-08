@@ -1,7 +1,8 @@
 public class Room {
     String roomName;
     String description;
-    Character[] characterArray;
+    NPC[] characterArray;
+    Player player;
     Room[] roomArray;
     Item[] itemArray;
     Room roomNorth;
@@ -12,6 +13,7 @@ public class Room {
     String south;
     String west;
     String east;
+    Integer roomCharacters;
     Room yo;
 
 
@@ -19,14 +21,24 @@ public class Room {
         this.roomName = roomName;
         this.description = description;
         this.roomArray = new Room[4];
-        this.characterArray = new Character[5];
+        this.characterArray = new NPC[5];
+        this.player = player;
         this.itemArray = new Item[5];
+        this.roomCharacters = 0;
 
 
 
 
 
     }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+    public void removePlayer(Player player){
+        this.player = null;
+    }
+
     public Room getroomEast(){
         if(roomEast !=null){
             return roomEast;
@@ -46,14 +58,14 @@ public class Room {
 
         for (int i = 0; i < characterArray.length; i++) {
             if (characterArray[i] != null) {
-                //Character aduulo = this.characterArray[i];
+
                 returnstring += " \n"
                 + characterArray[i];
             }
         }
         for (int i = 0; i < itemArray.length; i++) {
             if (itemArray[i] != null) {
-                //Item aduulo = this.itemArray[i];
+
                 returnstring += " \n"
                         + itemArray[i];
             }
@@ -65,22 +77,32 @@ public class Room {
 
     }
 
-    public boolean addCharacter(Character characterA) {
+    public boolean addCharacter(NPC characterA) {
         for (int i = 0; i < characterArray.length; i++) {
             if (characterArray[i] == null) {
                 characterArray[i] = characterA;
                 characterA.setRoomName(getRoomName());
+                roomCharacters++;
+                for(int a = 0; a< itemArray.length;a++){
+                    if (itemArray[a] != null) {
+                        if (itemArray[a].clean == false) {
+                            itemArray[a] = null;
+                        }
+                    }
+
+                }
                 //characterA.roomName = roomName;
                 return true;
             }
         }
         return false;
     }
-    public void removeCharacter(Character characterA) {
+    public void removeCharacter(NPC characterA) {
         for (int i = 0; i < characterArray.length; i++) {
             if (characterArray[i] != null){
                     if(characterArray[i].equals(characterA)){
                         characterArray[i] = null;
+                        roomCharacters = roomCharacters -1;
                     }
 
             }

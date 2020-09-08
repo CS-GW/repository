@@ -1,5 +1,6 @@
 
 public class Character {
+
     String characterName;
     String characterDescription;
     private String roomName;

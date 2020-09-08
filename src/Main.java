@@ -1,54 +1,39 @@
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.atomic.AtomicInteger;
 
-
-import java.util.Scanner;
 
 public class Main {
+
+    private Timer timer;
+    private static AtomicInteger timeLeft;
+
+
 
 
 
 
     public static void main(String[] args) {
 
+        public void initTimer(int secs){
+            timeLeft = new AtomicInteger(secs);
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    int tl = timeLeft.decrementAndGet();
+                    if (tl == 0) {
+                        System.out.println("youss loost the game");
+                        // Add code to tell the user they lost and to exit the game.
+                    }
+                }
+            };
+            //initTimer(20);
+            timeLeft.addAndGet(20);
 
-        Adult gilbert = new Adult("me","lazy");
+            //timer = new Timer();
 
-        Adult g2 = new Adult("not me","programmer");
-        Room bedroom = new Room("bed", "warm");
-        Item rock = new Item("rock", "heavy");
-        Room redroom = new Room("snow","on da bluff");
-
-        Room checkRoom = new Room("Kitchen", "A place for cooking");
-        Character vincent = new Adult("Vincent", "Balding");
-        Character gilbert2 = new Adult("Gilbert", "Programmer");
-        checkRoom.addCharacter(gilbert);
-
-        checkRoom.addCharacter(gilbert);
-        checkRoom.addCharacter(vincent);
-        checkRoom.removeCharacter(vincent);
-        System.out.println(checkRoom);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            //timer.schedule(task, 0, 1000);
+        }
 
 
         /*
@@ -84,4 +69,6 @@ public class Main {
 
          */
     }
+
+
 }
