@@ -2,6 +2,7 @@ public class Child extends NPC {
     public Child(String name, String description) {
         this.characterName = name;
         this.characterDescription = description;
+        this.initialroom = true;
 
 
     }
@@ -15,7 +16,7 @@ public class Child extends NPC {
 
 
     public String toString() {
-        return this.characterName + " " + this.characterDescription + this.scareLevel;
+        return this.characterName + " " + this.characterDescription;
 
     }
 }

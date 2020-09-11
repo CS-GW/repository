@@ -7,6 +7,7 @@ public class Adult extends NPC {
     public Adult(String name, String description){
         this.characterName = name;
         this.characterDescription = description;
+        this.initialroom = true;
     }
     //public int getScareLevel() {
         //return scareLevel;
@@ -18,7 +19,7 @@ public class Adult extends NPC {
 
 
     public String toString() {
-        return this.characterName + " " + this.characterDescription + " scaredlevel: " + this.scareLevel;
+        return this.characterName + " " + this.characterDescription;
 
 
         //ArrayList yo = new ArrayList();

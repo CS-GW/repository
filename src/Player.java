@@ -34,6 +34,8 @@ public class Player extends Character {
 
 
     public void play(Scanner s) {
+        XMLparserMain.initTimer(60);
+        XMLparserMain.incrementTime(5);
         Boolean activeGame = true;
 
 
@@ -194,6 +196,7 @@ public class Player extends Character {
                                                         System.out.println(getLocationRoom().characterArray[b].characterName + " shrieked");
                                                         if (getLocationRoom().characterArray[b].getScareLevel() > 99) {
                                                             System.out.println(getLocationRoom().characterArray[b].characterName + " was removed from the house");
+                                                            XMLparserMain.incrementTime(30);
 
                                                             getLocationRoom().removeCharacter(getLocationRoom().characterArray[b]);
                                                             this.gameNPCS = this.gameNPCS-1;
@@ -201,7 +204,9 @@ public class Player extends Character {
                                                                 System.out.println("you won");
                                                                 activeGame = false;}
                                                         } else if (getLocationRoom().characterArray[b].getScareLevel() > 49) {
+                                                            if(getLocationRoom().characterArray[b].initialroom == true){
                                                             boolean changedirection = true;
+                                                            getLocationRoom().characterArray[b].initialroom =false;
                                                             while (changedirection) {
                                                                 int rand2 = random.nextInt(4);
                                                                 if (rand2 == 0) {
@@ -238,7 +243,7 @@ public class Player extends Character {
                                                                         }
                                                                     }
                                                                 }
-                                                            }
+                                                            }}
 
                                                         }
                                                     }
@@ -265,13 +270,16 @@ public class Player extends Character {
                                                             if (getLocationRoom().characterArray[b].getScareLevel() > 99) {
                                                                 System.out.println(getLocationRoom().characterArray[b].characterName + " was removed from the house");
                                                                 getLocationRoom().removeCharacter(getLocationRoom().characterArray[b]);
+                                                                XMLparserMain.incrementTime(30);
                                                                 this.gameNPCS = this.gameNPCS-1;
                                                                 if (this.gameNPCS == 0){
                                                                     System.out.println("you won");
                                                                     activeGame = false;
                                                                 }
                                                             } else if (getLocationRoom().characterArray[b].getScareLevel() > 49) {
-                                                                boolean changedirection = true;
+                                                                if(getLocationRoom().characterArray[b].initialroom == true){
+                                                                    boolean changedirection = true;
+                                                                    getLocationRoom().characterArray[b].initialroom =false;
                                                                 while (changedirection) {
                                                                     int rand2 = random.nextInt(4);
                                                                     if (rand2 == 0) {
@@ -310,7 +318,7 @@ public class Player extends Character {
                                                                     }
                                                                 }
 
-                                                            }
+                                                            }}
                                                         }
                                                     }
 
@@ -331,12 +339,15 @@ public class Player extends Character {
                                                         if (getLocationRoom().characterArray[b].getScareLevel() > 99) {
                                                             System.out.println(getLocationRoom().characterArray[b].characterName + " was removed from the house");
                                                             getLocationRoom().removeCharacter(getLocationRoom().characterArray[b]);
+                                                            XMLparserMain.incrementTime(30);
                                                             this.gameNPCS = this.gameNPCS-1;
                                                             if (this.gameNPCS == 0){
                                                                 System.out.println("you won");
                                                                 activeGame = false;}
                                                         } else if (getLocationRoom().characterArray[b].getScareLevel() > 49) {
-                                                            boolean changedirection = true;
+                                                            if(getLocationRoom().characterArray[b].initialroom == true){
+                                                                boolean changedirection = true;
+                                                                getLocationRoom().characterArray[b].initialroom =false;
                                                             while (changedirection) {
                                                                 int rand2 = random.nextInt(4);
                                                                 if (rand2 == 0) {
@@ -375,7 +386,7 @@ public class Player extends Character {
                                                                 }
                                                             }
 
-                                                        }
+                                                        }}
                                                     }
                                                 }
                                                 realItem = false;

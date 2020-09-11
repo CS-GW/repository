@@ -1,4 +1,5 @@
 public class NPC extends Character {
+    boolean initialroom;
     int scareLevel;
 
 

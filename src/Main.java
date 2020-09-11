@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
 
+
     private static Timer timer;
     private static AtomicInteger timeLeft;
 
@@ -33,7 +34,38 @@ public class Main {
 
 
 
-    public static void main(String[] args) {
+    //private static BST yaHeard;
+    sll drama;
+
+
+    public static void main(String[] args){
+
+        sll drama1 = new sll("hello");
+
+        drama1.insert("hello2", 0);
+        drama1.insert("hello3", 1);
+        drama1.append("hello");
+        drama1.insert("hellome",-1);
+        System.out.println(drama1);
+
+        BST yaHeard = new BST();
+
+        yaHeard.insert(50);
+        yaHeard.printInOrder();
+        yaHeard.insert(2);
+        yaHeard.insert(3);
+        yaHeard.printInOrder();
+        yaHeard.insert(4);
+        yaHeard.insert(100);
+        yaHeard.printInOrder();
+
+        yaHeard.insert(62);
+        yaHeard.printInOrder();
+
+        yaHeard.printTree();
+
+
+
         /*
         timerExample te = new timerExample();
         te.starTimer(3);
@@ -42,8 +74,8 @@ public class Main {
         timeLeft.get();
         timeLeft.set(timeLeft.get() + 50);
          */
-        Main.initTimer(5);
-        Main.incrementTime(5);
+        //Main.initTimer(5);
+        //Main.incrementTime(5);
 
         /*
         System.out.println(vincent);
