@@ -1,12 +1,12 @@
 import java.util.ArrayList;
-class BST {
+public class BST {
 
     private class BSTNode {
-        int value;
+        Room value;
         BSTNode left;
         BSTNode right;
 
-        public BSTNode(int value){
+        public BSTNode(Room value){
             this.value = value;
         }
 
@@ -31,30 +31,30 @@ class BST {
 
     private BSTNode root;
 
-    private BSTNode insert(BSTNode curr, int value){
+    private BSTNode insert(BSTNode curr, Room value){
         if (curr == null)
             return new BSTNode(value);
-        if (value > curr.value)
+        if (value.compareTo(curr.value) == -1)
             curr.right = insert(curr.right, value);
-        else if (value < curr.value)
+        else if (value.compareTo(curr.value) == 1)
             curr.left = insert(curr.left, value);
         return curr;
     }
 
-    public void insert(int value){
+    public void insert(Room value){
         root = insert(root, value);
     }
 
-    private boolean search(BSTNode curr, int value){
+    private boolean search(BSTNode curr, Room value){
         System.out.println("Visiting: " + (curr == null ? "null :(" : curr.value));
         if (curr == null) return false;
         if (curr.value == value) return true;
-        if (value > curr.value)
+        if (value.compareTo(curr.value) == -1)
             return search(curr.right, value);
         return search(curr.left, value);
     }
 
-    public boolean search(int value){
+    public boolean search(Room value){
         return search(root, value);
     }
 
@@ -81,18 +81,19 @@ class BST {
     // Testing
     public static void main(String[] args){
         BST bst = new BST();
-        bst.insert(8);
-        bst.insert(3);
-        bst.insert(1);
-        bst.insert(6);
-        bst.insert(4);
-        bst.insert(7);
-        bst.insert(10);
-        bst.insert(14);
-        bst.insert(13);
+
+        Room room1 = new Room("Kitchen", "Food Location");
+        Room room2 = new Room("Bedroom", "Bed Location");
+        Room room3 = new Room("Bathroom", "Toilet Location");
+        Room room4 = new Room("Deck", "Chair Location");
+        Room room5 = new Room("Blyat Room", "Location of the Schvedtka");
+        bst.insert(room1);
+        bst.insert(room2);
+        bst.insert(room3);
+        bst.insert(room5);
         bst.printTree();
-        System.out.println("9? " + bst.search(9));
-        System.out.println("7? " + bst.search(7));
+        System.out.println("room1? " + bst.search(room1));
+        System.out.println("room7? " + bst.search(room4));
         bst.printInOrder();
     }
 }

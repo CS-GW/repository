@@ -49,7 +49,7 @@ public class Main {
         System.out.println(drama1);
 
         BST yaHeard = new BST();
-
+        /*
         yaHeard.insert(50);
         yaHeard.printInOrder();
         yaHeard.insert(2);
@@ -63,7 +63,7 @@ public class Main {
         yaHeard.printInOrder();
 
         yaHeard.printTree();
-
+*/
 
 
         /*

@@ -1,4 +1,4 @@
-public class Room {
+public class Room implements Comparable<Room>{
     String roomName;
     String description;
     NPC[] characterArray;
@@ -30,6 +30,17 @@ public class Room {
 
 
 
+    }
+
+    @Override
+    public int compareTo(Room room){
+        if (this.roomName.toLowerCase().compareTo(room.roomName.toLowerCase()) > 0){
+            return 1;
+        } else if (this.roomName.toLowerCase().compareTo(room.roomName.toLowerCase()) == 0){
+            return 0;
+        } else {
+            return -1;
+        }
     }
 
     public void setPlayer(Player player) {
