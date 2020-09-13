@@ -5,10 +5,13 @@ import java.util.Scanner;
 public class Player extends Character {
     private String gameCommand;
     int gameNPCS;
+    boolean cheatmode;
+    BST roomsBST;
 
 
     public Player(String name, String description) {
         this.characterName = name;
+        this.cheatmode = false;
         this.characterDescription = description;
 
 
@@ -45,10 +48,41 @@ public class Player extends Character {
             if //(getGameCommand().matches("quit"|"exit"))
             (getGameCommand().equals("quit") || getGameCommand().equals("exit")) {
                 activeGame = false;
-            } else if (getGameCommand().equals("look")) {
+            }
+            else if (getGameCommand().equals("cheatmode")){
+                this.cheatmode = true;
+                System.out.println("You have entered the Matrix");
+            }
+
+
+            else if (getGameCommand().equals("look;all")) {
+                if(cheatmode){
+                    this.roomsBST.printTree();
+                }
+                else System.out.println("No Cheating!");
+
+
+
+
+            }else if (getGameCommand().equals("look")) {
 //look – this command immediately outputs to the user the complete information pertaining
 // to the Room the Player is in (together with all Characters/Items in it).
                 System.out.println(getLocationRoom());
+                //System.out.println(this.roomsBST.search(getLocationRoom()));
+
+
+
+
+            }else if (getGameCommand().contains("look: ")) {
+                if(cheatmode){
+                    int left = getGameCommand().indexOf(":");
+                    String possibleRoomName = getGameCommand().substring(left + 2);
+                    Room possibleRoom = new Room(possibleRoomName,"");
+                    if (this.roomsBST.search(possibleRoom)!= null){
+                        System.out.println(this.roomsBST.search(possibleRoom));}
+                    else System.out.println("not a room");
+                    }
+                else System.out.println("no cheater");
 
             } else if (getGameCommand().equals("east")) {
                 //"north, east, south, west – the Player leaves the current Room and enters its respective neighbor.
@@ -432,5 +466,6 @@ public class Player extends Character {
 
         }
         System.out.println("Goodbye");
+        System.exit(0);
     }
 }

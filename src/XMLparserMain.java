@@ -14,6 +14,7 @@ import java.io.IOException;
 
 import java.util.*;
 public class XMLparserMain {
+
     private static Timer timer;
     private static AtomicInteger timeLeft;
     public static void initTimer(int secs){
@@ -46,6 +47,7 @@ public class XMLparserMain {
         ArrayList gameNPCsArray;
         int gameNPCsInt;
 
+
         Scanner s = new Scanner(System.in);
 
         SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -55,8 +57,10 @@ public class XMLparserMain {
             XMLparser sxp = new XMLparser();
             saxParser.parse(xmlInput, sxp);
             gamePlayer = sxp.getPlayer();
-            gameNPCsArray = sxp.charactergameArray;
-            gameNPCsInt = sxp.getGameNPCs();
+            gamePlayer.roomsBST = sxp.getRoomsBST();
+            gamePlayer.gameNPCS = sxp.getGameNPCs();
+
+
 
 
 

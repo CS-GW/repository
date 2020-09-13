@@ -15,6 +15,8 @@ public class XMLparser extends DefaultHandler {
     String description;
     ArrayList charactergameArray;
     int gameNPCs;
+    BST roomsBST;
+    BST bstrooms = new BST();
 
     String localname1;
     String localname2;
@@ -40,6 +42,7 @@ public class XMLparser extends DefaultHandler {
                              String localName,
                              String qName,
                              Attributes atts) throws SAXException {
+        BST bst = new BST();
 
            // System.out.println("Start Element " + qName);
         if (qName.equals("child")) {
@@ -61,6 +64,7 @@ public class XMLparser extends DefaultHandler {
             roomList.get(roomCount).setPlayer(player2);
             player2.setLocationRoom(roomList.get(roomCount));
             thaPlayaPlayer = player2;
+
 
             playerLocation = roomList.get(roomCount);
             //System.out.println(playerLocation.roomName);
@@ -115,8 +119,11 @@ public class XMLparser extends DefaultHandler {
             }
 
             roomList.add(room1);
+            bstrooms.insert(room1);
+            //roomsBST.insert(room1);
             roomCount++;
         }
+
     }
     //description = atts.getValue("room", "description");
 
@@ -151,10 +158,13 @@ public class XMLparser extends DefaultHandler {
                     roomList.get(i).roomEast = roomList.get(a);
                 }
             }
+
         }
         for (int i = 0; i < roomCount; i++) {
             //System.out.println(roomList.get(i).getroomEast());
         }
+
+
 
 
 
@@ -170,9 +180,16 @@ public class XMLparser extends DefaultHandler {
     public int getGameNPCs(){
         return gameNPCs;}
 
+
+
+
+
     public Room getPlayerLocation(){
         return playerLocation;
     }
+    public BST getRoomsBST() {return bstrooms;}
+
+
     public Player getPlayer(){
         return thaPlayaPlayer;
     }

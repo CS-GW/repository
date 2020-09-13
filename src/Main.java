@@ -39,6 +39,10 @@ public class Main {
 
 
     public static void main(String[] args){
+        BST bsss = null;
+        Room room8 = new Room("yo","uo");
+        bsss.insert(room8);
+        bsss.printTree();
 
         sll drama1 = new sll("hello");
 
@@ -48,7 +52,7 @@ public class Main {
         drama1.insert("hellome",-1);
         System.out.println(drama1);
 
-        BST yaHeard = new BST();
+        //BST yaHeard = new BST();
         /*
         yaHeard.insert(50);
         yaHeard.printInOrder();
