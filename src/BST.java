@@ -56,6 +56,40 @@ public class BST {
             return search(curr.right, value);
         return search(curr.left, value);
     }*/
+    /*
+   private boolean search2(BSTNode curr, String roomName){
+       if (curr == null){
+           return false;
+       } else if (roomName.toLowerCase().compareTo(curr.value.roomName.toLowerCase()) == 0){
+           return true;
+       } else if (roomName.toLowerCase().compareTo(curr.value.roomName.toLowerCase()) > 0){
+           return search2(curr.right, roomName);
+       } else {
+           return search2(curr.left, roomName);
+       }
+
+   }
+
+   public boolean search2(String roomName){
+       return search2(root, roomName);
+   }
+
+   private Room getRoomFromBSTByName(BSTNode curr, String roomName){
+       if (roomName.toLowerCase().compareTo(curr.value.roomName.toLowerCase()) == 0){
+           return curr.value;
+       } else if (roomName.toLowerCase().compareTo(curr.value.roomName.toLowerCase()) > 0){
+           return getRoomFromBSTByName(curr.right, roomName);
+       } else {
+           return getRoomFromBSTByName(curr.left, roomName);
+       }
+   }
+
+   public Room getRoomFromBSTByName(String roomName){
+       return getRoomFromBSTByName(root, roomName);
+   }
+
+     */
+
    private Room search(BSTNode curr, Room value){
        //System.out.println("Visiting: " + (curr == null ? "null :(" : curr.value));
        if (value.compareTo(curr.value) == 0)
@@ -118,7 +152,8 @@ public class BST {
         System.out.println(room1);
         System.out.println(room8);
         System.out.println(room1.compareTo(room8));
-        System.out.println(bst.search(room8));
+//        System.out.println(bst.search2("kitchen"));
+//        System.out.println(bst.getRoomFromBSTByName("Kitchen"));
 
 
 

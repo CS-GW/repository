@@ -43,6 +43,10 @@ public class Room implements Comparable<Room>{
         }
     }
 
+    public boolean compareName(String roomName){
+        return this.roomName.toLowerCase().equals(roomName.toLowerCase());
+    }
+
     public void setPlayer(Player player) {
         this.player = player;
     }

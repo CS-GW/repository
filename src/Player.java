@@ -74,7 +74,7 @@ public class Player extends Character {
 
 
             }else if (getGameCommand().contains("look: ")) {
-                if(cheatmode){
+                if(cheatmode) {
                     int left = getGameCommand().indexOf(":");
                     String possibleRoomName = getGameCommand().substring(left + 2);
                     Room possibleRoom = new Room(possibleRoomName,"");
@@ -82,7 +82,17 @@ public class Player extends Character {
                         System.out.println(this.roomsBST.search(possibleRoom));}
                     else System.out.println("not a room");
                     }
-                else System.out.println("no cheater");
+
+
+                    /*
+                    if (this.roomsBST.search2(possibleRoomName)) {
+                        System.out.println(this.roomsBST.getRoomFromBSTByName(possibleRoomName));
+                    } else {
+                        System.out.println("That room does not exist!");
+                    }
+
+                     }*/
+                 else System.out.println("no cheater");
 
             } else if (getGameCommand().equals("east")) {
                 //"north, east, south, west – the Player leaves the current Room and enters its respective neighbor.
